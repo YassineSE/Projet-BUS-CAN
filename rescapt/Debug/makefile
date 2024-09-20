@@ -65,8 +65,8 @@ all: main-build
 main-build: rescapt.elf secondary-outputs
 
 # Tool invocations
-rescapt.elf rescapt.map: $(OBJS) $(USER_OBJS) /home/yassine/Documents/WORKSPACE_RESCAPT_STM32CUBEIDE/rescapt/LinkerScript.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "rescapt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/yassine/Documents/WORKSPACE_RESCAPT_STM32CUBEIDE/rescapt/LinkerScript.ld" --specs=nosys.specs -Wl,-Map="rescapt.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+rescapt.elf rescapt.map: $(OBJS) $(USER_OBJS) /home/yassine/Documents/CRS/BUS\ CAN/rescapt/LinkerScript.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "rescapt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/yassine/Documents/CRS/BUS CAN/rescapt/LinkerScript.ld" --specs=nosys.specs -Wl,-Map="rescapt.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
