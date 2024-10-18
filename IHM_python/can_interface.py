@@ -43,3 +43,4 @@ class CANInterface:
             type=0  # Supposer que c'est un CADRE DE DONNÉES pour simplifier
         )
         return can_message
+
