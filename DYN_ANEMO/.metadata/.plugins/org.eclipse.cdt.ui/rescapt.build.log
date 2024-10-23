@@ -1,0 +1,25 @@
+10:26:07 **** Incremental Build of configuration Debug for project rescapt ****
+make all 
+arm-none-eabi-gcc "../src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DSTM32 -DSTM32F1 -DSTM32F103RBTx -DNUCLEO_F103RB -DDEBUG -DSTM32F103xB -DUSE_HAL_DRIVER -c -I"/home/e2024/e24tello/Documents/Projet-BUS-CAN/DYN_ANEMO/rescapt/HAL_Driver/Inc/Legacy" -I"/home/e2024/e24tello/Documents/Projet-BUS-CAN/DYN_ANEMO/rescapt/src/vl6180x" -I"/home/e2024/e24tello/Documents/Projet-BUS-CAN/DYN_ANEMO/rescapt/Utilities/STM32F1xx_Nucleo" -I"/home/e2024/e24tello/Documents/Projet-BUS-CAN/DYN_ANEMO/rescapt/inc" -I"/home/e2024/e24tello/Documents/Projet-BUS-CAN/DYN_ANEMO/rescapt/CMSIS/device" -I"/home/e2024/e24tello/Documents/Projet-BUS-CAN/DYN_ANEMO/rescapt/CMSIS/core" -I"/home/e2024/e24tello/Documents/Projet-BUS-CAN/DYN_ANEMO/rescapt/HAL_Driver/Inc" -O0 -ffunction-sections -Wall -fcommon -fstack-usage -MMD -MP -MF"src/main.d" -MT"src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "src/main.o"
+../src/main.c: In function 'main':
+../src/main.c:56:2: warning: implicit declaration of function 'uart1_Init'; did you mean 'uart3_Init'? [-Wimplicit-function-declaration]
+   56 |  uart1_Init();
+      |  ^~~~~~~~~~
+      |  uart3_Init
+../src/main.c: In function 'can_callback':
+../src/main.c:218:3: error: 'manuel' undeclared (first use in this function)
+  218 |   manuel = msg_rcv.data[1];
+      |   ^~~~~~
+../src/main.c:218:3: note: each undeclared identifier is reported only once for each function it appears in
+../src/main.c:222:3: error: 'vel_cons' undeclared (first use in this function)
+  222 |   vel_cons = msg_rcv.data[1];
+      |   ^~~~~~~~
+../src/main.c: In function 'send_vel':
+../src/main.c:237:16: error: 'pos' undeclared (first use in this function)
+  237 |  txMsg.data[0]=pos;
+      |                ^~~
+make: *** [src/subdir.mk:61: src/main.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+
+10:26:08 Build Failed. 4 errors, 1 warnings. (took 940ms)
+
