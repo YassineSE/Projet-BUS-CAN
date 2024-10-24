@@ -30,7 +30,7 @@ class CommunicationHandler:
         )
         self.can_interface.send_message(message)
 
-    def get_wind_speed(self):
+    def get_wind_speed(self, enable_print=True):
         # Prepare message to request wind speed with ID = 1 and data = [1]
         message = CAN_Message(
             id=ID_1,               # Message ID
@@ -45,7 +45,8 @@ class CommunicationHandler:
             # Update HMI labels based on message ID
             if msg.id == 0x55:  # Wind speed
                 self.wind_speed = msg.data[0] 
-                print('Wind speed: ' + str(self.wind_speed))
+                if enable_print:
+                    print('Wind speed: ' + str(self.wind_speed))
 
     def send_motor_mode(self, manual_mode):
         # Prepare message to set motor mode (manual/auto) with ID = 1
@@ -94,13 +95,23 @@ class CommunicationHandler:
             self.distance = dist_int  # Already in a suitable scale
             self.luminosite = lum_int
 
+            results = {}
+
             # Conditional print based on whether it's distance or luminosity
+            '''
             if msg.data[6] == 0:
                 print(f"Pressure: {self.pressure} hPa, Humidity: {self.humidity} %, "
                       f"Temperature: {self.temperature} °C, Distance: {self.distance} mm")
             elif msg.data[6] == 1:
                 print(f"Pressure: {self.pressure} hPa, Humidity: {self.humidity} %, "
                       f"Temperature: {self.temperature} °C, Luminosity: {self.luminosite} lux")
+            '''
+            results["pressure"] = self.pressure
+            results["humidity"] = self.humidity
+            results["temperature"] = self.temperature
+            results["distance"] = self.distance
+            results["luminosity"] = self.luminosite
+            return results
 
 
     def switch_lum_dist(self):
@@ -115,8 +126,8 @@ class CommunicationHandler:
         self.can_interface.send_message(message)
 
     
-    def get_orientation_measurements()
-        handler.get_orientation_measurements()(self):
+    def get_orientation_measurements(self):
+        #handler.get_orientation_measurements()(self):
         # Send CAN message with ID=3 requesting orientation measurements
         message = CAN_Message(
             id=ID_3,               # Message ID for request
@@ -137,7 +148,13 @@ class CommunicationHandler:
             self.psi = (msg.data[4] << 8) | msg.data[5]    # Psi (16 bits)
 
             # Print the orientation data
-            print(f"Phi: {self.phi} degrees, Theta: {self.theta} degrees, Psi: {self.psi} degrees")
+            #print(f"Phi: {self.phi} degrees, Theta: {self.theta} degrees, Psi: {self.psi} degrees")
+            angles = {
+                "phi" : self.phi,
+                "theta" : self.theta,
+                "psi" : self.psi
+            }
+            return angles
 
 
 
