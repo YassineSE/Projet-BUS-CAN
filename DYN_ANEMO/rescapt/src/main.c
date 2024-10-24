@@ -1,9 +1,9 @@
 #include "main.h"
 
 //###################################################################
-#define VL6180X_PRESS_HUM_TEMP	1
+#define VL6180X_PRESS_HUM_TEMP	0
 #define MPU9250	0
-#define DYN_ANEMO 0
+#define DYN_ANEMO 1
 //###################################################################
 
 //====================================================================
@@ -206,6 +206,7 @@ int main(void)
 
 void can_callback(void)
 {
+#if DYN_ANEMO
 	CAN_Message msg_rcv;
 
 	can_Read(&msg_rcv);
@@ -222,12 +223,14 @@ void can_callback(void)
 		vel_cons = msg_rcv.data[1];
 
 	}
+#endif
 
 }
 
 //====================================================================
 //			SEND VEL
 //====================================================================
+#if DYN_ANEMO
 void send_vel()
 {
 	txMsg.id=0x55;	// Identifiant du message à envoyer
@@ -237,6 +240,7 @@ void send_vel()
 	txMsg.data[0]=pos;
 	can_Write(txMsg);
 }
+#endif
 
 //====================================================================
 //			TIMER CALLBACK PERIOD

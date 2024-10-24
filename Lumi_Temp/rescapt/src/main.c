@@ -33,8 +33,14 @@ void VL6180x_Init(void);
 void VL6180x_Step(void);
 
 int status;
-int new_switch_state;
+int new_switch_state = 0;
+float pressure = 0;
+float temperature = 0;
+float humidity = 0;
 int switch_state = -1;
+int lum = 0;
+int dist = 1;
+int send_data = 0;
 
 //====================================================================
 // >>>>>>>>>>>>>>>>>>>>>>>>>> MAIN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -47,6 +53,9 @@ int main(void)
 	uart2_Init();
 	uart1_Init();
 	i2c1_Init();
+	lps22hb_setup();
+	hts221_activate();
+	hts221_storeCalibration();
 
 #if DYN_ANEMO
     anemo_Timer1Init();
@@ -73,7 +82,13 @@ int main(void)
     can_Init();
     can_SetFreq(CAN_BAUDRATE); // CAN BAUDRATE : 500 MHz -- cf Inc/config.h
 #if USE_FILTER
-    can_Filter_list((ID_1<<21)|(ID_2<<5) , (ID_3<<21)|(ID_4<<5) , CANStandard, 0); // Accept until 4 Standard IDs
+    //can_Filter_list((ID_1<<21)|(ID_2<<5) , (ID_3<<21)|(ID_4<<5) , CANStandard, 0); // Accept until 4 Standard IDs
+
+    uint32_t id1_id2 = (ID_2 << 5);  // ID 1 dans le champ 16 bits
+    uint32_t id3_id4 = 0x00000000;   // Pas d'autres ID
+
+    can_Filter_list(id1_id2, id3_id4, CANStandard, 0);
+
 #else
     can_Filter_disable(); // Accept everybody
 #endif
@@ -118,6 +133,58 @@ int main(void)
 
 #if VL6180X_PRESS_HUM_TEMP
     VL6180x_Step();
+    // Lecture de la pression
+	lps22hb_getPressure(&pressure);
+
+	// Lecture de la température
+	hts221_getTemperature(&temperature);
+	hts221_getHumidity(&humidity);
+
+	// Afficher les valeurs via UART ou un autre moyen
+	term_printf("Pression: %f hPa, Température: %f °C, Humidity : %f %%\n\r", pressure, temperature,humidity);
+
+	if (send_data)
+	{
+		    uint16_t press_int=(uint16_t) pressure;
+			uint16_t hum_int=( uint16_t) humidity*100;
+			uint16_t temp_int=( uint16_t) temperature*100;
+
+			uint16_t lum_int = 0;
+			uint16_t dis_int = 0;
+
+			if (switch_state == 1) {
+			    lum_int = (int) Als.lux;
+			}
+			else {
+			    dis_int = get_range();
+			}
+
+			txMsg.id = 0x56;
+			txMsg.data[0] = (press_int >> 8) & 0xFF;
+			txMsg.data[1] = press_int & 0xFF;
+			txMsg.data[2] = (hum_int >> 8) & 0xFF;
+			txMsg.data[3] = hum_int & 0xFF;
+			txMsg.data[4] = (temp_int >> 8) & 0xFF;
+			txMsg.data[5] = temp_int & 0xFF;
+
+			if (switch_state == 1) {
+				txMsg.data[6] = 1;
+			    txMsg.data[7] = lum_int & 0xFF;
+			}
+			else{
+				txMsg.data[6] = 0;
+			    txMsg.data[7] = dis_int & 0xFF;
+			}
+
+			txMsg.len=8;
+			txMsg.format=CANStandard;
+			txMsg.type=CANData;
+			can_Write(txMsg);
+
+			send_data = 0;
+	}
+
+	HAL_Delay(100);
 
 
 #endif
@@ -139,21 +206,21 @@ int main(void)
 
 void can_callback(void)
 {
+#if VL6180X_PRESS_HUM_TEMP
 	CAN_Message msg_rcv;
-	int i=0;
 
 	can_Read(&msg_rcv);
-	txMsg.id=0x55;			// Identifiant du message à envoyer
-
-	for(i=0;i<8;i++)
+	if (msg_rcv.data[0] == 1)
 	{
-	txMsg.data[i]=msg_rcv.data[i]+1;
-	}
-	txMsg.len=8;			// Nombre d'octets à envoyer
-	txMsg.format=CANStandard;
-	txMsg.type=CANData;
+		send_data = 1;
 
-	can_Write(txMsg);
+	}else if (msg_rcv.data[0] == 2)//mode
+	{
+
+		new_switch_state = !new_switch_state;
+
+	}
+#endif
 }
 //====================================================================
 //			TIMER CALLBACK PERIOD
@@ -199,7 +266,7 @@ void VL6180x_Step(void)
 {
     DISP_ExecLoopBody();
 
-    new_switch_state = XNUCLEO6180XA1_GetSwitch();
+    //new_switch_state = XNUCLEO6180XA1_GetSwitch();
     if (new_switch_state != switch_state) {
         switch_state=new_switch_state;
         status = VL6180x_Prepare(theVL6180xDev);

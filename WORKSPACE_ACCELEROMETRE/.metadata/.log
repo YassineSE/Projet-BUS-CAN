@@ -1,0 +1,18 @@
+!SESSION 2024-10-24 13:05:15.734 -----------------------------------------------
+eclipse.buildId=Version 1.9.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Command-line arguments:  -data /home/e2024/e24tello/Documents/Projet-BUS-CAN/WORKSPACE -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-10-24 13:05:20.138
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-10-24 13:05:20.180
+!MESSAGE Log4j initialized with config file /home/e2024/e24tello/Documents/Projet-BUS-CAN/WORKSPACE/.metadata/.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-10-24 13:05:21.613
+!MESSAGE Started RMI Server, listening on port 41338
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-10-24 13:05:46.646
+!MESSAGE Indexed 'ACCELERO_SEUL_QUI_MARCHE' (78 sources, 171 headers) in 4,24 sec: 13 958 declarations; 82 341 references; 0 unresolved inclusions; 1 syntax errors; 0 unresolved names (0 %)

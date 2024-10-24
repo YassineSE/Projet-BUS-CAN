@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (12.3.rel1)
+# Toolchain: GNU Tools for STM32 (10.3-2021.10)
 ################################################################################
 
 -include ../makefile.init
@@ -65,8 +65,8 @@ all: main-build
 main-build: rescapt.elf secondary-outputs
 
 # Tool invocations
-rescapt.elf rescapt.map: $(OBJS) $(USER_OBJS) /home/yassine/Documents/CRS/BUS_CAN/rescapt/LinkerScript.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "rescapt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/yassine/Documents/CRS/BUS_CAN/rescapt/LinkerScript.ld" --specs=nosys.specs -Wl,-Map="rescapt.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+rescapt.elf rescapt.map: $(OBJS) $(USER_OBJS) /home/e2024/e24tello/Documents/Projet-BUS-CAN/Lumi_Temp/rescapt/LinkerScript.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "rescapt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/e2024/e24tello/Documents/Projet-BUS-CAN/Lumi_Temp/rescapt/LinkerScript.ld" --specs=nosys.specs -Wl,-Map="rescapt.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

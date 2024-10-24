@@ -98,5 +98,6 @@ void AlarmInit(void);
 void AlarmState(void);
 void GoToAlaramState(void);
 void RangeState(void);
+uint16_t get_range(void);
 
 #endif /* SRC_VL6180X_VL6180X_LIB_H_ */

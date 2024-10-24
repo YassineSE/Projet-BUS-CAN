@@ -31,13 +31,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  13 .debug_macro  0001d59a  00000000  00000000  00039e08  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_line   0001b7f6  00000000  00000000  000573a2  2**0
+ 14 .debug_line   0001b03c  00000000  00000000  000573a2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_str    0008c67f  00000000  00000000  00072b98  2**0
+ 15 .debug_str    0008c66d  00000000  00000000  000723de  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .comment      00000050  00000000  00000000  000ff217  2**0
+ 16 .comment      00000050  00000000  00000000  000fea4b  2**0
                   CONTENTS, READONLY
- 17 .debug_frame  00004908  00000000  00000000  000ff268  2**2
+ 17 .debug_frame  00004908  00000000  00000000  000fea9c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -14483,6 +14483,7 @@ void can_callback(void)
  8005350:	b580      	push	{r7, lr}
  8005352:	b084      	sub	sp, #16
  8005354:	af00      	add	r7, sp, #0
+#if DYN_ANEMO
 	CAN_Message msg_rcv;
 
 	can_Read(&msg_rcv);
@@ -14496,10 +14497,10 @@ void can_callback(void)
 	{
 		send_vel();
  8005364:	f000 f818 	bl	8005398 <send_vel>
-	{
 		vel_cons = msg_rcv.data[1];
 
 	}
+#endif
 
 }
  8005368:	e00e      	b.n	8005388 <can_callback+0x38>
@@ -14532,10 +14533,10 @@ void can_callback(void)
  8005394:	20000060 	.word	0x20000060
 
 08005398 <send_vel>:
-
 //====================================================================
 //			SEND VEL
 //====================================================================
+#if DYN_ANEMO
 void send_vel()
 {
  8005398:	b580      	push	{r7, lr}

@@ -1,0 +1,26 @@
+2024-10-23 10:55:58,255 [INFO] Activator:177 - 
+
+
+2024-10-23 10:55:58,258 [INFO] Activator:178 - !SESSION log4j initialized
+2024-10-23 10:56:02,095 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2024-10-23 10:58:43,529 [INFO] Activator:177 - 
+
+
+2024-10-23 10:58:43,532 [INFO] Activator:178 - !SESSION log4j initialized
+2024-10-23 10:58:47,039 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2024-10-23 11:00:05,270 [INFO] Activator:177 - 
+
+
+2024-10-23 11:00:05,273 [INFO] Activator:178 - !SESSION log4j initialized
+2024-10-23 11:00:09,241 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2024-10-24 11:39:36,038 [INFO] Activator:177 - 
+
+
+2024-10-24 11:39:36,039 [INFO] Activator:178 - !SESSION log4j initialized
+2024-10-24 11:39:39,403 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2024-10-24 12:42:07,912 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SWT SessionManagerDBus: Failed to UnregisterClient: GDBus.Error:org.xfce.SessionManager.Error.General: Client with id of '/org/xfce/SessionClients/org_eclipse_swt_Application' was not found
+2024-10-24 12:43:20,837 [INFO] Activator:177 - 
+
+
+2024-10-24 12:43:20,839 [INFO] Activator:178 - !SESSION log4j initialized
+2024-10-24 12:43:24,097 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com

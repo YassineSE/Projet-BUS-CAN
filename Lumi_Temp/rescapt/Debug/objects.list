@@ -63,6 +63,8 @@
 "./src/drv_spi.o"
 "./src/drv_uart.o"
 "./src/dynamixel.o"
+"./src/hts221.o"
+"./src/lps22hb.o"
 "./src/main.o"
 "./src/mpu9250.o"
 "./src/stm32f1xx_hal_msp.o"

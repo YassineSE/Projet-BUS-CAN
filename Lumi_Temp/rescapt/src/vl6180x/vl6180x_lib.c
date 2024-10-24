@@ -530,5 +530,9 @@ void RangeState(void) {
     }
 }
 
+uint16_t get_range(void)
+{
+	return range;
+}
 
 

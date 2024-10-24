@@ -24,3 +24,4 @@
 ../src/vl6180x/vl6180x_lib.c:327:6:AlarmState	24	static
 ../src/vl6180x/vl6180x_lib.c:408:6:GoToAlaramState	8	static
 ../src/vl6180x/vl6180x_lib.c:415:6:RangeState	24	static
+../src/vl6180x/vl6180x_lib.c:533:10:get_range	4	static

@@ -1,0 +1,15 @@
+!SESSION 2024-10-24 13:02:05.501 -----------------------------------------------
+eclipse.buildId=Version 1.9.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-10-24 13:02:19.382
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-10-24 13:02:19.424
+!MESSAGE Log4j initialized with config file /home/e2024/e24tello/Documents/Projet-BUS-CAN/ACCELERO_SEUL_QUI_MARCHE/.metadata/.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-10-24 13:02:21.641
+!MESSAGE Started RMI Server, listening on port 41338
